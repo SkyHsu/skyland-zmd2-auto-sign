@@ -1,0 +1,18 @@
+name: Keep GitHub Actions Alive
+
+on:
+  schedule:
+    # 建议每天运行一次检查，你也可以根据需要调整
+    - cron: '0 8 * * *'          # 这里直接写8点
+      timezone: "Asia/Shanghai"  # 明确指定时区为北京时间
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 需要有写入权限才能创建提交
+    steps:
+      - uses: actions/checkout@v4
+      - name: Keep GitHub Actions alive
+        uses: entepotenz/keep-github-actions-alive-min-dependencies@v1
